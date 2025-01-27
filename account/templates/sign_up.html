@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #e0f7fa;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            border: 2px solid #4CAF50;
+        }
+        h2 {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: #45a049;
+        }
+        .signin-btn {
+            background-color: #2196F3;
+        }
+        .signin-btn:hover {
+            background-color: #0b7dda;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .signin-btn-container {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .signin-btn-container a {
+            text-decoration: none;
+            color: #2196F3;
+            font-size: 14px;
+        }
+        .signin-btn-container a:hover {
+            text-decoration: underline;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Signup</h2>
+    <form id="signup-form" method="POST"  onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="reenter-password">Re-enter Password</label>
+            <input type="password" id="reenter-password" name="reenter-password" required>
+            <div id="error-message" class="error"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <button type="submit" class="btn">Sign Up</button>
+    </form>
+
+    <div class="signin-btn-container">
+        <a href="{% url 'login' %}" class="signin-btn">Already have an account? Sign In</a>
+    </div>
+</div>
+
+<script>
+    function validateForm() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("reenter-password").value;
+        var errorMessage = document.getElementById("error-message");
+
+        if (password !== confirmPassword) {
+            errorMessage.textContent = "Passwords do not match!";
+            return false; // Prevent form submission
+        }
+        errorMessage.textContent = ""; // Clear error message if passwords match
+        return true; // Allow form submission
+    }
+</script>
+    <!-- JavaScript to show the popup -->
+    {% if messages %}
+    <script>
+        // This checks if there are any success messages from Django
+        var successMessage = "{% for message in messages %}{% if message.tags == 'success' %}{{ message }}{% endif %}{% endfor %}";
+
+        if (successMessage) {
+            // Show the alert message
+            var result = confirm(successMessage);
+            if (result) {
+                // Redirect to the login page if 'OK' is clicked
+                window.location.href = "{% url 'login' %}";
+            }
+        }
+    </script>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+    /* General Reset */
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #eef5f9, #dbe7eb);
+    }
+
+    /* Navbar Styles */
+    .navbar {
+        background: linear-gradient(90deg, #38b2ac, #319795); /* Teal gradient */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 10px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .navbar ul {
+        list-style: none;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+
+    .navbar ul li {
+        flex: 1;
+        text-align: center;
+    }
+
+    .navbar ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        padding: 12px 20px;
+        display: inline-block;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .navbar ul li a:hover {
+        background-color: rgba(255, 255, 255, 0.3); /* Slightly more prominent hover effect */
+        border-radius: 25px;
+        color: #f7fafc; /* Light gray hover text */
+    }
+
+    /* Main Content */
+    .content {
+        text-align: center;
+        margin-top: 100px;
+        padding: 20px;
+        max-width: 800px;
+        background: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+    }
+
+    .content h1 {
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .content p {
+        font-size: 18px;
+        color: #555;
+    }
+
+    /* Footer (optional) */
+    footer {
+        text-align: center;
+        margin-top: 50px;
+        font-size: 14px;
+        color: #888;
+    }
+</style>
+
+</head>
+<body>
+    <nav class="navbar">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Cart</a></li>
+            <li><a href="#">Order</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="content">
+        <h1>Welcome to the Home Page</h1>
+        <p>Explore our platform and enjoy seamless navigation through the Home, Cart, and Order sections.</p>
+    </div>
+
+    <!-- Optional Footer -->
+    <footer>
+        &copy; 2025 MyApp. All rights reserved.
+    </footer>
+</body>
+</html>
