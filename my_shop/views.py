@@ -18,7 +18,7 @@ def home(request):
 
 
 def product_detail(request, product_id):
-
+    # print("gttttttttttteeffffffffffffffffffffffffffffffff")
     product = get_object_or_404(Product, id=product_id)  # Only filter by product_id
     return render(request, 'productpage.html', {'product': product})
 

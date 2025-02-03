@@ -130,16 +130,12 @@
 </head>
 <body>
 
-<nav class="navbar">
-    <ul>
-        <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'cart_page' request.user.id %}">Your Cart</a></li>
-        <li><a href="{% url 'order_history_page' request.user.id %}">Order</a></li>
-        <li><a href="#">Logout</a></li>
-    </ul>
-</nav>
+    <!-- Navbar included -->
+    {% include 'includes/navbar.html' %}
 
-<div class="order-box">
+    <!-- design of order success page -->
+
+    <div class="order-box">
     <div class="success-icon">✅</div>
     <h1>Wel Come  {{ order.user }} </h1>
     <h1>Order Placed Successfully!</h1>

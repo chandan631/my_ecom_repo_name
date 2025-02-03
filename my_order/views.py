@@ -1,11 +1,14 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+
 from .models import Product, Cart, Order
 
 
 def add_to_cart(request):
-
     if request.method == "POST":
+        # print('daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+
         product_id = int(request.POST.get("product_id"))
         product = get_object_or_404(Product, id=product_id)
 
@@ -20,7 +23,10 @@ def add_to_cart(request):
             message = "Items added successfully"
 
         # Redirect back to the same product page with a success message
-        return redirect(f"/shop/product_detail/{product_id}/?message={message}")
+
+        message = "Product added successfully"  # Example message
+        url = reverse("product_detail", kwargs={"product_id": product_id}) + f"?message={message}"
+        return redirect(url)
 
     return render(request, "productpage.html")
 

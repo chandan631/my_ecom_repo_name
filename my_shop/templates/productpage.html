@@ -198,15 +198,8 @@
 </head>
 <body>
 
-  <!-- Navbar -->
-  <nav class="navbar">
-        <ul>
-            <li><a href="{% url 'home' %}">Home</a></li>
-            <li><a href="{% url 'cart_page' request.user.id %}">Your Cart</a></li>
-            <li><a href="{% url 'order_history_page' request.user.id %}">Order</a></li>
-            <li><a href="#">Logout</a></li>
-        </ul>
-    </nav>
+    <!-- Navbar included -->
+    {% include 'includes/navbar.html' %}
 
   <!-- alert for add-to-cart -->
         {% if request.GET.message %}
