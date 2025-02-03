@@ -1,7 +1,7 @@
 <nav class="navbar">
     <ul>
         <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="{% url 'cart_page' user.id %}">Your Cart</a></li>
+        <li><a href="{% url 'cart_page' request.user.id %}">Your Cart</a></li>
         <li><a href="{% url 'order_history_page' user.id %}">Order</a></li>
         <li><a href="#">Logout</a></li>
     </ul>
