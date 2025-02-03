@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Success Page</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4f7784, #dbe7eb);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 75vh;
+        }
+
+        /* Navbar Styles (Unchanged) */
+        .navbar {
+            background: linear-gradient(90deg, #38b2ac, #319795);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            flex: 1;
+            text-align: center;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px 20px;
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 25px;
+            color: #f7fafc;
+        }
+
+        /* Order Success Box */
+        .order-box {
+            margin-top: 20px;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            text-align: center;
+            animation: fadeIn 0.8s ease-in-out;
+        }
+
+        .order-box h1 {
+            color: #2c7a7b;
+            font-size: 24px;
+        }
+
+        .order-details {
+            text-align: left;
+            margin-top: 20px;
+            line-height: 1.8;
+            font-size: 18px;
+            color: #444;
+        }
+
+        .order-details strong {
+            color: #2d3748;
+        }
+
+        .success-icon {
+            font-size: 50px;
+            color: #38b2ac;
+            margin-bottom: 10px;
+        }
+
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+    <style>
+    /* Button Styling */
+    .order-btn {
+        display: inline-block;
+        padding: 12px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: white;
+        background: linear-gradient(90deg, #38b2ac, #319795);
+        border: none;
+        border-radius: 8px;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .order-btn:hover {
+        background: linear-gradient(90deg, #319795, #2c7a7b);
+        transform: scale(1.05);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .order-btn a {
+        color: white;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'cart_page' request.user.id %}">Your Cart</a></li>
+        <li><a href="{% url 'order_history_page' request.user.id %}">Order</a></li>
+        <li><a href="#">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="order-box">
+    <div class="success-icon">✅</div>
+    <h1>Wel Come  {{ order.user }} </h1>
+    <h1>Order Placed Successfully!</h1>
+    <div class="order-details">
+        <p><strong>Order ID:</strong> {{ order.id }}</p>
+        <p><strong>Customer Name:</strong> {{ order.user }}</p>
+        <p><strong>Product Name:</strong> {{ order.product.name }}</p>
+        <p><strong>Quantity:</strong> {{ order.quantity }}</p>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        <p><strong>Payment Status:</strong> Paid </p>
+    </div>
+    <button class = "order-btn" >
+        <a href="{% url 'order_history_page' request.user.id %}">Go To Your Order Details</a>
+    </button>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Detail Page</title>
+  <style>
+        /* General Reset */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4f7784, #dbe7eb);
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(90deg, #38b2ac, #319795); /* Teal gradient */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            flex: 1;
+            text-align: center;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px 20px;
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* Slightly more prominent hover effect */
+            border-radius: 25px;
+            color: #f7fafc; /* Light gray hover text */
+        }
+
+    /* Product Container Styles */
+    .product-container {
+        align-items: center;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        max-width: 400px;
+        text-align: center;
+        padding: 20px;
+        margin-top: 50px; /* Adds space below the sticky navbar */
+        margin-left: 37%;
+    }
+
+    .product-container img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .product-container h3 {
+        font-size: 24px;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    .product-container .description {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    .product-container .price {
+        font-size: 20px;
+        color: #28a745;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .product-container .category {
+        font-size: 14px;
+        color: #007bff;
+    }
+
+    /* Button Styling */
+    .buy-now, .add-to-cart {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        text-decoration: none;
+    }
+
+    /* Buy Now Button */
+    .buy-now {
+        background-color: #007bff;
+        color: white;
+    }
+
+    .buy-now:hover {
+        background-color: #0056b3;
+    }
+
+    /* Add to Cart Button */
+    .add-to-cart {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .add-to-cart:hover {
+        background-color: #218838;
+    }
+
+          .alert-container {
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 9999;
+    }
+
+    .alert {
+        background-color: #28a745;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 2s ease-out;
+    }
+
+       .alert2 {
+        background-color: yellow;
+        color: red;
+        padding: 10px 20px;
+        border-radius: 5px;
+        font-size: 16px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        animation: fadeIn 2s ease-out;
+    }
+
+
+    @keyframes fadeIn {
+        0% { opacity: 0; }
+        100% { opacity: 1; }
+    }
+
+      #popupDialog {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        h1 {
+            color: green;
+        }
+
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'cart_page' request.user.id %}">Your Cart</a></li>
+            <li><a href="{% url 'order_history_page' request.user.id %}">Order</a></li>
+            <li><a href="#">Logout</a></li>
+        </ul>
+    </nav>
+
+  <!-- alert for add-to-cart -->
+        {% if request.GET.message %}
+                {% if request.GET.message == "Items added successfully" %}
+                    <div class="alert alert-success" role="alert">
+                        {{ request.GET.message }}
+                    </div>
+                {% else %}
+                    <div class="alert2 alert-success" role="alert">
+                        {{ request.GET.message }}
+                    </div>
+                {% endif %}
+            <!-- Auto-redirect to cart page after 3 seconds -->
+            <meta http-equiv="refresh" content="3;url={% url 'cart_page' request.user.id %}">
+
+        {% endif %}
+
+  <!-- Product Container -->
+
+              <div class="product-container">
+                <img src="{{ product.image.url }}" alt="Image of {{ product.name }}">
+                <h3>{{ product.name }}</h3>
+                <p class="description">{{ product.description }}</p>
+                <p class="price">₹{{ product.price }}</p>
+                <p class="category">Category: {{ product.category.name }}</p>
+
+                <!-- Order Placed Button (Optional) -->
+                    <button class="buy-now" onclick="popupFn()">Place Order</button>
+                    <div id="popupDialog">
+                        <p>Place Your Order</p>
+                            <form id = "orderFrom" method="post"  action="{% url 'order_placed_page' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <h6>Quantity</h6>
+                                <input type="number" name="quantity">
+                            </form> <br>
+                        <button onclick="closeFn()"> Cancel Order </button>
+                        <button onclick="myFunction()" > Confirm </button>
+                    </div>
+
+                 <!-- Add to Cart Form -->
+                    <form method="POST" action="{% url 'add_to_cart' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                        <button type="submit" class="add-to-cart">Add to Cart</button>
+                    </form>
+              </div>
+
+    <script>
+        function myFunction() {
+  document.getElementById("orderFrom").submit();
+}
+
+        function popupFn() {
+            document.getElementById(
+                "popupDialog"
+            ).style.display = "block";
+        }
+        function closeFn() {
+            document.getElementById(
+                "popupDialog"
+            ).style.display = "none";
+        }
+    </script>
+
+
+
+
+</body>
+</html>

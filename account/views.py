@@ -3,7 +3,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
+
+
 # Create your views here.
+
 def signup(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -21,33 +24,44 @@ def signup(request):
             first_name=first_name,
             last_name=last_name)
         user.save()
-
         messages.success(request, 'Sign up completed. please login')
-        return redirect('signup')
-
+        return redirect('login')
     return render(request, 'sign_up.html' )
+
 
 def signin(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
         # print(username,password)
-
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
-            print("hy user name is: " , user)
+            # print("hy user name is: " , user)
             # If authentication is successful, log in the user
             login(request, user)
-            print('zzzzzzzzzzzzzzzzzzzzzzzzzz')
+            # print('zzzzzzzzzzzzzzzzzzzzzzzzzz')
             messages.success(request, 'You have successfully signed in!')
             return redirect('home')  # Replace 'home' with the name of your desired redirect page
         else:
-            print("hy there is no-user " )
+            # print("hy there is no-user " )
 
             # If authentication fails, show an error message
             messages.error(request, 'Invalid username or password!')
             return render(request, 'sign_in.html')
 
     return render(request, 'sign_in.html' )
+
+
+
+
+
+
+
+
+
+
+
+
+
 

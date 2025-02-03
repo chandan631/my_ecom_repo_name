@@ -5,104 +5,262 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <style>
-    /* General Reset */
-    body {
-        margin: 0;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: linear-gradient(135deg, #eef5f9, #dbe7eb);
+        /* General Reset */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #4f7784, #212121);
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            background: linear-gradient(90deg, #38b2ac, #319795); /* Teal gradient */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar ul li {
+            flex: 1;
+            text-align: center;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 12px 20px;
+            display: inline-block;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .navbar ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* Slightly more prominent hover effect */
+            border-radius: 25px;
+            color: #f7fafc; /* Light gray hover text */
+        }
+
+        /* Category Cards - Horizontal Scroll */
+        .container {
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .categories {
+            display: flex;
+            gap: 15px; /* Space between cards */
+            overflow-x: auto; /* Enable horizontal scrolling */
+            padding: 10px;
+            scroll-behavior: smooth;
+        }
+
+        .categories::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .categories::-webkit-scrollbar-thumb {
+            background: #38b2ac;
+            border-radius: 10px;
+        }
+
+        .categories::-webkit-scrollbar-track {
+            background: #dbe7eb;
+        }
+
+        .card {
+            min-width: 80px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            background: white;
+            text-align: center;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .card img {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card h3 {
+            font-size: 16px;
+            color: #333;
+            margin: 4px 0;
+        }
+
+        /* Pagination Buttons */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .pagination a,
+        .pagination button {
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .pagination a {
+            background: #38b2ac;
+            color: white;
+        }
+
+        .pagination a:hover {
+            background: #319795;
+        }
+
+        .pagination button {
+            background: #e2e8f0;
+            color: #718096;
+        }
+
+        .pagination button[disabled] {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Footer (optional) */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 14px;
+            color: #888;
+        }
+
+
+
+    /* Product Cards Styling */
+    .product-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 20px auto;
+        padding: 10px;
     }
 
-    /* Navbar Styles */
-    .navbar {
-        background: linear-gradient(90deg, #38b2ac, #319795); /* Teal gradient */
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        padding: 10px 0;
-        position: sticky;
-        top: 0;
-        z-index: 1000;
-    }
-
-    .navbar ul {
-        list-style: none;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        margin: 0;
-        padding: 0;
-    }
-
-    .navbar ul li {
-        flex: 1;
-        text-align: center;
-    }
-
-    .navbar ul li a {
-        text-decoration: none;
-        color: white;
-        font-size: 18px;
-        font-weight: 600;
-        padding: 12px 20px;
-        display: inline-block;
-        transition: all 0.3s ease-in-out;
-    }
-
-    .navbar ul li a:hover {
-        background-color: rgba(255, 255, 255, 0.3); /* Slightly more prominent hover effect */
-        border-radius: 25px;
-        color: #f7fafc; /* Light gray hover text */
-    }
-
-    /* Main Content */
-    .content {
-        text-align: center;
-        margin-top: 100px;
-        padding: 20px;
-        max-width: 800px;
-        background: #ffffff;
+    .product-card {
+        background: #fff;
+        border-radius: 12px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        text-align: center;
     }
 
-    .content h1 {
-        font-size: 36px;
-        color: #333;
-        margin-bottom: 20px;
+    .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     }
 
-    .content p {
+    .product-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .product-card h3 {
+        margin: 10px 0;
         font-size: 18px;
+        color: #333;
+        font-weight: bold;
+    }
+
+    .product-card .description {
+        margin: 5px 10px;
+        font-size: 14px;
         color: #555;
     }
 
-    /* Footer (optional) */
-    footer {
-        text-align: center;
-        margin-top: 50px;
+    .product-card .price {
+        margin: 10px 0;
+        font-size: 16px;
+        font-weight: bold;
+        color: #38b2ac; /* Teal */
+    }
+
+    .product-card .category {
         font-size: 14px;
-        color: #888;
+        color: #718096;
+        margin-bottom: 15px;
     }
 </style>
 
 </head>
 <body>
-    <nav class="navbar">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Cart</a></li>
-            <li><a href="#">Order</a></li>
-            <li><a href="#">Logout</a></li>
-        </ul>
-    </nav>
+    <!-- Navbar included -->
+    {% include 'includes/navbar.html' %}
 
-    <!-- Main Content -->
-    <div class="content">
-        <h1>Welcome to the Home Page</h1>
-        <p>Explore our platform and enjoy seamless navigation through the Home, Cart, and Order sections.</p>
+    <!-- Category Cards -->
+    <div class="container">
+        <div class="categories">
+                <div class="card">
+                    <form method="POST" >
+                    {% csrf_token %}
+                    <input type="hidden" name="category_id" value="0">
+                    <button type="submit" style="border: none; background: none; padding: 0;">
+                        <img src="https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-1170x780.jpg" alt="Image of All ">
+                        <h3>All</h3>
+                    </button>
+                    </form>
+                </div>
+            {% for category in categorys %}
+                <div class="card">
+                    <form method="POST" >
+                    {% csrf_token %}
+                    <input type="hidden" name="category_id" value="{{ category.id }}">
+                    <button type="submit" style="border: none; background: none; padding: 0;">
+                        <img src="{{ category.image.url }}" alt="Image of {{ category.name }}">
+                        <h3>{{ category.name }}</h3>
+                    </button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
-    <!-- Optional Footer -->
-    <footer>
-        &copy; 2025 MyApp. All rights reserved.
-    </footer>
+    <!-- Product Cards -->
+        <div class="product-container">
+            {% for product in products %}
+                <div class="product-card">
+                    <a href="{% url 'product_detail' product.id %}">
+                        <img src="{{ product.image.url }}" alt="Image of {{ product.name }}">
+                        <h3>{{ product.name }}</h3>
+                        <p class="description">{{ product.description }}</p>
+                        <p class="price">₹{{ product.price }}</p>
+                        <p class="category">Category: {{ product.category.name }}</p>
+                    </a>
+                </div>
+
+            {% endfor %}
+        </div>
+
+
 </body>
 </html>
