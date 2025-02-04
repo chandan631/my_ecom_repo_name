@@ -13,7 +13,6 @@ def home(request):
             products = products
         else :
             products = products.filter(category_id = x)
-
     return render(request, 'home.html',{'categorys':categorys, 'products':products })
 
 
