@@ -76,16 +76,28 @@ WSGI_APPLICATION = 'my_ecom.wsgi.application'
 
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'postgres',  # Database name
+#         'USER': 'postgres',  # Database user
+#         'PASSWORD': 'RgEzpKZfdNw9nMMz',  # Database password
+#         'HOST': 'db.nhuufupievwuctqlkoij.supabase.co',  # Supabase PostgreSQL host
+#         'PORT': '5432',  # PostgreSQL default port
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'postgres',  # Database name
-        'USER': 'postgres',  # Database user
+        'USER': 'postgres.nhuufupievwuctqlkoij',  # Database user
         'PASSWORD': 'RgEzpKZfdNw9nMMz',  # Database password
-        'HOST': 'db.nhuufupievwuctqlkoij.supabase.co',  # Supabase PostgreSQL host
+        'HOST': 'aws-0-us-east-1.pooler.supabase.com',  # Corrected Supabase PostgreSQL host
         'PORT': '5432',  # PostgreSQL default port
     }
 }
+
 
 
 
