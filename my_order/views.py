@@ -1,10 +1,12 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-
 from .models import Product, Cart, Order
+from django.contrib.auth.decorators import login_required
 
 
+
+@login_required(login_url='/account/signin/')
 def add_to_cart(request):
     if request.method == "POST":
         # print('daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
@@ -30,7 +32,7 @@ def add_to_cart(request):
 
     return render(request, "productpage.html")
 
-
+@login_required(login_url='/account/signin/')
 def cart_page(request, user_id):
     # print('User ID:', user_id)
 
@@ -49,7 +51,7 @@ def cart_page(request, user_id):
         'cart_items': cart_items
     })
 
-
+@login_required(login_url='/account/signin/')
 def order_placed_page(request):
     product_id = int(request.POST.get("product_id"))
     quantity = int(request.POST.get("quantity"))
@@ -68,7 +70,7 @@ def order_placed_page(request):
     return render(request, "order_success_page.html", {
         'order': order })
 
-
+@login_required(login_url='/account/signin/')
 def order_history_page(request, user_id):
     # print('hiiiiiiiiiii User ID:', user_id)
 
