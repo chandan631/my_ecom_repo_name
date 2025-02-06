@@ -1,7 +1,13 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from my_shop.models import Category , Product
-
 # Create your views here.
+
+
+def redirect_to_shop(request):
+
+    return redirect("/shop/home/")
+
+
 def home(request):
     categorys = Category.objects.all()
     products = Product.objects.all()

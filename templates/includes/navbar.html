@@ -4,7 +4,7 @@
         {% if user.id %}
         <li><a href="{% url 'cart_page' user.id %}">Your Cart</a></li>
         <li><a href="{% url 'order_history_page' user.id %}">Order</a></li>
-        <li><a href="{% url 'logout_user' %}">Logout</a></li>
+        <li><strong style="color:#c2f026">{{user.username}}</strong><a href="{% url 'logout_user' %}">Logout</a></li>
         {% else %}
         <li><a href = "{% url 'login' %}">Login</a></li>
         {% endif %}

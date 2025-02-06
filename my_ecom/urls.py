@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from my_shop import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.redirect_to_shop ),
     path('account/', include('account.urls')),
     path('shop/', include('my_shop.urls')),
     path('order/', include('my_order.urls')),
