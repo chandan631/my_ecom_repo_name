@@ -15,7 +15,7 @@ def signup(request):
         first_name = request.POST.get('first-name')
         last_name = request.POST.get('last-name')
         email = request.POST.get('email')
-        print(username,password,reenter_password,first_name,last_name,email)
+        # print(username,password,reenter_password,first_name,last_name,email)
 
         user = User.objects.create_user(
             username=username,
@@ -42,7 +42,7 @@ def signin(request):
             login(request, user)
             # print('zzzzzzzzzzzzzzzzzzzzzzzzzz')
             messages.success(request, 'You have successfully signed in!')
-            return redirect('product')  # Replace 'home' with the name of your desired redirect page
+            return redirect('all_product')  # Replace 'home' with the name of your desired redirect page
         else:
             # print("hy there is no-user " )
 
@@ -54,7 +54,7 @@ def signin(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('product' )
+    return redirect('all_product' )
 
 
 
