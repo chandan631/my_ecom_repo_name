@@ -9,12 +9,21 @@ that data base( MYSQL AND POSTGRAYSQL ) is provide by different service provider
 amazon etc
 
 GIT
----
+-----------------------
 git add .
 git commit -m "write ur comment"
 git push
 
 
+makemigration vs migrate
+-------------------------
+
+working of this
+---------------
+anchore tag > href
+form tag > method = post
+form tag > method = post with action keyword , it take name attribute of url
+form tag > without any method by default is get
 
 
 
