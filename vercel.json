@@ -15,8 +15,6 @@
             "src": "/(.*)",
             "dest": "my_ecom/wsgi.py"
         }
-    ],
-    "static": {
-        "directory": "media"
-    }
+    ]
+
 }
