@@ -5,27 +5,23 @@ from my_shop.models import Category , Product
 
 def redirect_to_shop(request):
 
-    return redirect("/shop/home/")
+    return redirect("/shop/product/")
 
 
-def home(request):
+def product(request,category_id=None):
     categorys = Category.objects.all()
     products = Product.objects.all()
-    p = None
-    if request.method == 'POST':
-        p =  request.POST.get('category_id')
-        x = int(p)
-        if x == 0 :
-            products = products
-        else :
-            products = products.filter(category_id = x)
-    return render(request, 'home.html',{'categorys':categorys, 'products':products })
+    if category_id == None :
+        products = products
+    else :
+        products = products.filter(category_id = category_id)
+    return render(request, 'product.html',{'categorys':categorys, 'products':products })
 
 
 def product_detail(request, product_id):
     # print("gttttttttttteeffffffffffffffffffffffffffffffff")
     product = get_object_or_404(Product, id=product_id)  # Only filter by product_id
-    return render(request, 'productpage.html', {'product': product})
+    return render(request, 'product_detail.html', {'product': product})
 
 
 

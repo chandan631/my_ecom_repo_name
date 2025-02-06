@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
+    <title>Product Page</title>
     <style>
         /* General Reset */
         body {
@@ -232,14 +232,12 @@
                 </div>
             {% for category in categorys %}
                 <div class="card">
-                    <form method="POST" >
-                    {% csrf_token %}
-                    <input type="hidden" name="category_id" value="{{ category.id }}">
-                    <button type="submit" style="border: none; background: none; padding: 0;">
+                    <a href="{% url 'category_product' category.id %}">
+                    <div style="border: none; background: none; padding: 0;">
                         <img src="{{ category.image.url }}" alt="Image of {{ category.name }}">
                         <h3>{{ category.name }}</h3>
-                    </button>
-                    </form>
+                    </div>
+                    </a>
                 </div>
             {% endfor %}
         </div>

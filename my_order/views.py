@@ -30,7 +30,7 @@ def add_to_cart(request):
         url = reverse("product_detail", kwargs={"product_id": product_id}) + f"?message={message}"
         return redirect(url)
 
-    return render(request, "productpage.html")
+    return render(request, "product_detail.html")
 
 @login_required(login_url='/account/signin/')
 def cart_page(request, user_id):

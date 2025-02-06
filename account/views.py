@@ -42,7 +42,7 @@ def signin(request):
             login(request, user)
             # print('zzzzzzzzzzzzzzzzzzzzzzzzzz')
             messages.success(request, 'You have successfully signed in!')
-            return redirect('home')  # Replace 'home' with the name of your desired redirect page
+            return redirect('product')  # Replace 'home' with the name of your desired redirect page
         else:
             # print("hy there is no-user " )
 
@@ -54,7 +54,7 @@ def signin(request):
 
 def logout_user(request):
     logout(request)
-    return redirect('home' )
+    return redirect('product' )
 
 
 
