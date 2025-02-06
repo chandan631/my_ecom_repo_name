@@ -1,20 +1,13 @@
-{
-    "builds": [
-        {
-            "src": "my_ecom/wsgi.py",
-            "use": "@vercel/python",
-            "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.3" }
-        }
-    ],
+ {
+    "builds": [{
+      "src": "my_ecom/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "15mb", "runtime": "python3.11.3" }
+    }],
     "routes": [
-        {
-            "src": "/media/(.*)",
-            "dest": "/media/$1"
-        },
-        {
-            "src": "/(.*)",
-            "dest": "my_ecom/wsgi.py"
-        }
+      {
+        "src": "/(.*)",
+        "dest": "my_ecom/wsgi.py"
+      }
     ]
-
 }
