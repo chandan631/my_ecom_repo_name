@@ -221,22 +221,16 @@
     <div class="container">
         <div class="categories">
                 <div class="card">
-                    <form method="POST" >
-                    {% csrf_token %}
-                    <input type="hidden" name="category_id" value="0">
-                    <button type="submit" style="border: none; background: none; padding: 0;">
+                    <a href="{% url 'all_product' %}">
                         <img src="https://gratisography.com/wp-content/uploads/2024/11/gratisography-augmented-reality-1170x780.jpg" alt="Image of All ">
                         <h3>All</h3>
-                    </button>
-                    </form>
+                    </a>
                 </div>
             {% for category in categorys %}
                 <div class="card">
                     <a href="{% url 'category_product' category.id %}">
-                    <div style="border: none; background: none; padding: 0;">
                         <img src="{{ category.image.url }}" alt="Image of {{ category.name }}">
                         <h3>{{ category.name }}</h3>
-                    </div>
                     </a>
                 </div>
             {% endfor %}
