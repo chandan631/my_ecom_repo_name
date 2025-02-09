@@ -18,7 +18,7 @@ def product(request,category_id=None):
     else :
         products = products.filter(category_id = category_id)
 
-    paginator = Paginator(products,8)
+    paginator = Paginator(products,10)
     page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
 
