@@ -92,10 +92,15 @@
     }
 
     .card img {
-        width: 100%;
-        height: 80px;
-        object-fit: cover;
-        border-radius: 12px;
+        width: 100px; /* Adjust width as needed */
+        height: 70px; /* Consistent height */
+        object-fit: contain; /* Prevents cropping */
+        background: #f8f8f8; /* Background for transparent images */
+        padding-top: 15px; /* Adds spacing */
+        display: block; /* Ensures proper alignment */
+        border-radius: 10px;
+
+        margin: auto; /* Centers the image */
     }
 
     .card:hover {
@@ -137,7 +142,7 @@
     }
 
     .product-card img {
-        width: 65%; /* Adjust width as needed */
+        width: 70%; /* Adjust width as needed */
         height: 230px; /* Consistent height */
         object-fit: contain; /* Prevents cropping */
         background: #f8f8f8; /* Background for transparent images */
@@ -190,34 +195,73 @@
         margin-bottom: 12px;
     }
 
+/* Pagination Container */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
 
-    /* Pagination */
-    .pagination {
-        text-align: center;
-        margin-top: 20px;
-    }
+/* First & Last Buttons - Purple */
+.pagination a:first-of-type,
+.pagination a:last-of-type {
+    background: #6f42c1; /* Purple */
+    border: 2px solid #6f42c1;
+}
 
-    .page-btn {
-        display: inline-block;
-        padding: 8px 12px;
-        margin: 0 5px;
-        background: #38b2ac;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background 0.3s ease-in-out;
-    }
+.pagination a:first-of-type:hover,
+.pagination a:last-of-type:hover {
+    background: #563d7c; /* Darker Purple */
+    border-color: #563d7c;
+}
 
-    .page-btn:hover {
-        background: #319795;
-    }
+/* Previous & Next Buttons - Green */
+.pagination a:nth-of-type(2),
+.pagination a:nth-last-of-type(2) {
+    background: #28a745; /* Green */
+    border: 2px solid #28a745;
+}
 
-    .page-current {
-        display: inline-block;
-        padding: 8px 12px;
-        background: #f1f1f1;
-        border-radius: 5px;
-    }
+.pagination a:nth-of-type(2):hover,
+.pagination a:nth-last-of-type(2):hover {
+    background: #218838; /* Darker Green */
+    border-color: #218838;
+}
+
+/* Default Page Buttons - Blue */
+.pagination a {
+    display: inline-block;
+    padding: 10px 15px;
+    background: #007bff; /* Blue */
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out, transform 0.2s;
+    border: 2px solid #007bff;
+}
+
+.pagination a:hover {
+    background: #0056b3; /* Darker Blue */
+    border-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Page Indicator - Gray */
+.pagination span {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    padding: 8px 12px;
+    background: #f1f1f1;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
 
 
 </style>
