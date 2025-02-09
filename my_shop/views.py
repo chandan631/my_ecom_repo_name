@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from my_shop.models import Category , Product
+from django.core.paginator import Paginator
 # Create your views here.
 
 
@@ -11,11 +12,17 @@ def redirect_to_shop(request):
 def product(request,category_id=None):
     categorys = Category.objects.all()
     products = Product.objects.all()
-    if category_id == None :
+
+    if category_id is None:
         products = products
     else :
         products = products.filter(category_id = category_id)
-    return render(request, 'product.html',{'categorys':categorys, 'products':products })
+
+    paginator = Paginator(products,8)
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'product.html',{'categorys':categorys, 'page_obj':page_obj })
 
 
 def product_detail(request, product_id):

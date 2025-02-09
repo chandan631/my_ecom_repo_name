@@ -210,6 +210,32 @@
         color: #718096;
         margin-bottom: 15px;
     }
+
+        .pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+.page-btn {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 5px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background 0.3s ease-in-out;
+}
+.page-btn:hover {
+    background: #0056b3;
+}
+.page-current {
+    display: inline-block;
+    padding: 8px 12px;
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+
 </style>
 
 </head>
@@ -238,21 +264,34 @@
     </div>
 
     <!-- Product Cards -->
-        <div class="product-container">
-            {% for product in products %}
-                <div class="product-card">
-                    <a href="{% url 'product_detail' product.id %}">
-                        <img src="{{ product.image.url }}" alt="Image of {{ product.name }}">
-                        <h3>{{ product.name }}</h3>
-                        <p class="description">{{ product.description }}</p>
-                        <p class="price">₹{{ product.price }}</p>
-                        <p class="category">Category: {{ product.category.name }}</p>
-                    </a>
-                </div>
+    <div class="product-container">
+        {% for product in page_obj %}
+            <div class="product-card">
+                <a href="{% url 'product_detail' product.id %}">
+                    <img src="{{ product.image.url }}" alt="Image of {{ product.name }}">
+                    <h3>{{ product.name }}</h3>
+                    <p class="description">{{ product.description }}</p>
+                    <p class="price">₹{{ product.price }}</p>
+                    <p class="category">Category: {{ product.category.name }}</p>
+                </a>
+            </div>
 
-            {% endfor %}
-        </div>
+        {% endfor %}
+    </div>
 
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">First</a>
+            <a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        {% endif %}
+    </div>
 
 </body>
 </html>

@@ -15,7 +15,7 @@ def signup(request):
         first_name = request.POST.get('first-name')
         last_name = request.POST.get('last-name')
         email = request.POST.get('email')
-        # print(username,password,reenter_password,first_name,last_name,email)
+        print(username,password,reenter_password,first_name,last_name,email)
 
         user = User.objects.create_user(
             username=username,
